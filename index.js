@@ -1,15 +1,20 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  const queryObject = req.query;
+// Middleware untuk memeriksa kode pembelian
+function cekKodePembelian(req, res, next) {
+  const purchaseCode = req.query.purchase_code;
 
-  if (queryObject.purchase_code) {
-    const purchaseCode = queryObject.purchase_code;
-    res.send("Regular");
+  if (purchaseCode === "kode_rahasia") {
+    next(); // Lanjutkan ke rute berikutnya jika kode pembelian benar
   } else {
-    res.status(404).send("NGAPA LO ASU!!!");
+    res.status(401).send("Akses Ditolak"); // Kode pembelian tidak valid
   }
+}
+
+app.get("/", cekKodePembelian, (req, res) => {
+  // Hanya akan mencapai sini jika parameter valid
+  res.send("Konten yang Dibutuhkan");
 });
 
 const port = process.env.PORT || 3000;
