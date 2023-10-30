@@ -1,13 +1,18 @@
 const express = require("express");
-const http = require('http');
-
 const app = express();
 
+app.get("/", (req, res) => {
+  const queryObject = req.query;
+
+  if (queryObject.purchase_code) {
+    const purchaseCode = queryObject.purchase_code;
+    res.send("Regular");
+  } else {
+    res.status(404).send("Tidak Ditemukan");
+  }
+});
+
 const port = process.env.PORT || 3000;
-
-const { handleRequest } = require('./app');
-const server = http.createServer(handleRequest);
-
-app.get("/", (req, res) => res.send("Ngapa Lo Ajg!"));
-
-app.listen(port, () => console.log(`Server is listening on port ${port}`));
+app.listen(port, () => {
+  console.log(`Server mendengarkan pada port ${port}`);
+});
