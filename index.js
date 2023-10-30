@@ -5,16 +5,16 @@ const app = express();
 function cekKodePembelian(req, res, next) {
   const purchaseCode = req.query.purchase_code;
 
-  if (purchaseCode === "kode_rahasia") {
+  if (purchaseCode === "iki_kodeku") {
     next(); // Lanjutkan ke rute berikutnya jika kode pembelian benar
   } else {
-    res.status(401).send("Akses Ditolak"); // Kode pembelian tidak valid
+    res.status(401).send("Ora Iso Cok!"); // Kode pembelian tidak valid
   }
 }
 
 app.get("/", cekKodePembelian, (req, res) => {
   // Hanya akan mencapai sini jika parameter valid
-  res.send("Konten yang Dibutuhkan");
+  res.send("Regular");
 });
 
 const port = process.env.PORT || 3000;
