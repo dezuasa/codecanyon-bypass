@@ -8,7 +8,7 @@ app.get("/", (req, res) => {
     const purchaseCode = queryObject.purchase_code;
     res.send("Regular");
   } else {
-    res.status(404).send("Tidak Ditemukan");
+    res.status(404).send("NGAPA LO ASU!!!");
   }
 });
 
