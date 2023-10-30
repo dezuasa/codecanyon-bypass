@@ -1,8 +1,9 @@
-const http = require('http');
-const { handleRequest } = require('./app');
+const express = require("express");
 
-const server = http.createServer(handleRequest);
+const app = express();
 
-server.listen(80, () => {
-  console.log('Server is running on port 80');
-});
+const port = process.env.PORT || 3000;
+
+app.get("/", (req, res) => res.send("Ngapa Lo Ajg!"));
+
+app.listen(port, () => console.log(`Server is listening on port ${port}`));
